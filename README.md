@@ -23,7 +23,7 @@ var user = {
 		first: 'Guilherme',
 		last: 'Souza'
 	},
-	pass: new Buffer('042697a30b2dafbdf91bf66bdacdcba8', 'hex'),
+	pass: Buffer.from('042697a30b2dafbdf91bf66bdacdcba8', 'hex'),
 	creationDate: new Date('2014-04-11T21:22:32.504Z'),
 	active: true,
 	achievements: [3, 14, 15, 92, 65, 35]
@@ -115,7 +115,7 @@ Of course, a JSON field will miss the point about space efficiency and data vali
 ### ObjectId type
 js-binary gives first-class support for mongodb ObjectId. But since js-binary doesn't (and shouldn't) depend on any peculiar mongodb driver, the rules for this type are:
 
-* Encoding: any object `o` is accepted, as long `new Buffer(String(o), 'hex')` yields a 12-byte Buffer
+* Encoding: any object `o` is accepted, as long `Buffer.from(String(o), 'hex')` yields a 12-byte Buffer
 * Decoding: returns a 24-char hex-encoded string
 
 This should be compatible with most ObjectId implementations on the wild
