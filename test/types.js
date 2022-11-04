@@ -68,6 +68,18 @@ describe('types', function () {
 		})
 	})
 
+	it('should be sound for rgb', function () {
+		check(types.rgb, '#11aa22')
+		check(types.rgb, '#111', '#111111')
+		check(types.rgb, 'rgb(111, 111, 111)', '#6f6f6f')
+	})
+
+	it('should be sound for rgba', function () {
+		check(types.rgba, 'rgba(255, 255, 255, 0.3)')
+		check(types.rgba, 'rgba(0, 0, 0, 1.0)', 'rgba(0, 0, 0, 1)')
+		check(types.rgba, 'rgba(0, 0, 0, 1)', 'rgba(0, 0, 0, 1.0)')
+	})
+
 	it('should be sound for object id', function () {
 		check(types.oid, '123456789012345678901234')
 	})
@@ -109,6 +121,12 @@ function read(hexStr, type) {
  * @param {Object} type
  * @param {*} value
  */
-function check(type, value) {
-	should(read(write(type, value), type)).be.eql(value)
+function check(type, ...args) {
+	var value = args[0]
+
+	if (args.length === 1) {
+		should(read(write(type, value), type)).be.eql(value)
+	} else {
+		should(read(write(type, value), type)).be.oneOf(args)
+	}
 }

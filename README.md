@@ -88,6 +88,8 @@ Decode
 * 'date': a JS Date instance
 * 'json': any data supported by [JSON format](http://json.org/). Read bellow for more
 * 'oid': mongodb ObjectId (see bellow)
+* 'rgb': mongodb ObjectId (see bellow)
+* 'rgba': mongodb ObjectId (see bellow)
 
 ### Compound types
 A compound type is an object with (optional) fields. Those fields may be arrays, but with the restriction that every element has the same data schema.
@@ -119,6 +121,16 @@ js-binary gives first-class support for mongodb ObjectId. But since js-binary do
 * Decoding: returns a 24-char hex-encoded string
 
 This should be compatible with most ObjectId implementations on the wild
+
+### RGB type
+Stores three bytes into the buffer.
+Accepts the following formats: `rgb(r, g, b)` or `#111` or `#111111`.
+When reading, it will reconstruct the color in format `#111111`.
+
+### RGBA type
+Stores four bytes into the buffer.
+Accepts the following format: `rgba(r, g, b, a)`.
+When reading, it will reconstruct the color in format `rgba(r, g, b, a)`.
 
 ## Spec
 The binary format spec is documented in the format.md file
